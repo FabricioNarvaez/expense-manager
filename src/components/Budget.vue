@@ -1,9 +1,12 @@
 <template>
     <div class="contenedor contenedorHeader sombra">
-        <form class="budget">
+        <form class="budget" @submit.prevent="addBudget">
+            <Alert v-if="error">
+                {{ error }}
+            </Alert>
             <div class="field">
                 <label for="budget">Definir presupuesto</label>
-                <input class="newBudget" type="number" id="budget" placeholder="Añade tu presupuesto" />
+                <input v-model.number="newBudget" min="0" class="newBudget" type="number" id="budget" placeholder="Añade tu presupuesto" />
             </div>
             <input type="submit" value="Definir presupuesto" />
         </form>
@@ -11,7 +14,21 @@
 </template>
 
 <script setup lang="ts">
+    import { ref } from "vue";
 
+    import Alert from "./Alert.vue";
+
+    const newBudget = ref(0);
+    const error = ref('');
+
+    const addBudget = () => {
+        if(newBudget.value <= 0){
+            error.value = "El presupuesto no puede ser menor o igual a 0";
+            setTimeout(() => {
+                error.value = '';
+            }, 3000);
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
