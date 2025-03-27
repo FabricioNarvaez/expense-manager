@@ -1,16 +1,14 @@
 <template>
-    <div class="contenedor contenedorHeader sombra">
-        <form class="budget" @submit.prevent="addBudget">
-            <Alert v-if="error">
-                {{ error }}
-            </Alert>
-            <div class="field">
-                <label for="budget">Definir presupuesto</label>
-                <input v-model.number="newBudget" min="0" class="newBudget" type="number" id="budget" placeholder="Añade tu presupuesto" />
-            </div>
-            <input type="submit" value="Definir presupuesto" />
-        </form>
-    </div>
+    <form class="budget" @submit.prevent="addBudget">
+        <Alert v-if="error">
+            {{ error }}
+        </Alert>
+        <div class="field">
+            <label for="budget">Definir presupuesto</label>
+            <input v-model.number="newBudget" min="0" class="newBudget" type="number" id="budget" placeholder="Añade tu presupuesto" />
+        </div>
+        <input type="submit" value="Definir presupuesto" />
+    </form>
 </template>
 
 <script setup lang="ts">
@@ -28,7 +26,11 @@
                 error.value = '';
             }, 3000);
         }
+
+        emit('setBudget', newBudget.value);
     }
+
+    const emit = defineEmits(['setBudget']);
 </script>
 
 <style lang="scss" scoped>
