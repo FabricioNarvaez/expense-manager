@@ -5,15 +5,9 @@
         </div>
 
         <div class="expensesContainer">
-            <p>
-                <span>Presupuesto: </span>
-            </p>
-            <p>
-                <span>Disponible: </span>
-            </p>
-            <p>
-                <span>Gastado: </span>
-            </p>
+            <p>Presupuesto: <span>{{ formatAmount(budget) }} </span></p>
+            <p>Disponible: <span>{{ formatAmount(available) }} </span></p>
+            <p>Gastado: <span>{{ formatAmount(0) }} </span></p>
             
             <button class="resetApp">Resetear App</button>
         </div>
@@ -22,8 +16,20 @@
 
 <script setup lang="ts">
     import { ref } from "vue";
+    import { formatAmount } from "@/helpers";
 
     import image from '@img/grafico.jpg';
+
+    defineProps({
+        budget: {
+            type: Number,
+            required: true
+        },
+        available: {
+            type: Number,
+            required: true
+        }
+    });
 </script>
 
 <style lang="scss" scoped>
@@ -43,12 +49,12 @@
     .expensesContainer p{
         font-size: 2rem;
         text-align: center;
-        color: $dark-gray;
+        color: $blue;
     }
 
     .expensesContainer span{
         font-weight: bold;
-        color: $blue;
+        color: $dark-gray;
     }
 
     .resetApp {

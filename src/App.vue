@@ -6,7 +6,7 @@
 			
 			<div class="contenedor contenedorHeader sombra">
 				<Budget v-if="budget === 0" @setBudget="setBudget" />
-				<BudgetControl v-else />
+				<BudgetControl v-else :budget :available/>
 			</div>
 		</header>
 	</div>
@@ -19,9 +19,11 @@
 	import BudgetControl from './components/BudgetControl.vue';
 
 	const budget = ref(0);
+	const available = ref(0);
 
 	const setBudget = (newBudget: number) => {
 		budget.value = newBudget;
+		available.value = newBudget;
 	}
 </script>
 
