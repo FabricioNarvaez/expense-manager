@@ -14,6 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@scss': '/src/assets/scss',
+      '@img': '/src/assets/img',
     }
   }
 })

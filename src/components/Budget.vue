@@ -20,11 +20,13 @@
     const error = ref('');
 
     const addBudget = () => {
-        if(newBudget.value <= 0){
+        if(newBudget.value <= 0 || newBudget.value === '') {
             error.value = "El presupuesto no puede ser menor o igual a 0";
             setTimeout(() => {
                 error.value = '';
             }, 3000);
+                
+            return;
         }
 
         emit('setBudget', newBudget.value);
