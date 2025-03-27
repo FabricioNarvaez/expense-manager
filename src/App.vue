@@ -9,6 +9,12 @@
 				<BudgetControl v-else :budget :available/>
 			</div>
 		</header>
+
+		<main v-if="budget > 0">
+			<div class="createBudget">
+				<img :src="NewBudgetIcon" alt="Nuevo gasto" />
+			</div>
+		</main>
 	</div>
 </template>
 
@@ -17,6 +23,7 @@
 
 	import Budget from './components/Budget.vue';
 	import BudgetControl from './components/BudgetControl.vue';
+	import NewBudgetIcon from '@img/nuevo-gasto.svg';
 
 	const budget = ref(0);
 	const available = ref(0);
@@ -29,4 +36,20 @@
 
 <style lang="scss">
 	@import '@scss/app.scss';
+
+	.createBudget {
+		position: fixed;
+		bottom: 5rem;
+		right: 5rem;
+	}
+
+	.createBudget img{
+		width: 5rem;
+		transition: all .3s ease;
+	}
+
+	.createBudget img:hover{
+		cursor: pointer;
+		transform: scale(1.1);
+	}
 </style>
