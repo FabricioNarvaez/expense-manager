@@ -40,7 +40,7 @@
     import { ref } from 'vue';
     import Alert from './Alert.vue';
 
-    const emit = defineEmits(['hideModal']);
+    const emit = defineEmits(['hideModal', 'addExpense']);
     const expense = defineModel('expense');
     const props = defineProps({
         modal: {
@@ -55,7 +55,11 @@
     const addExpense = () => {
         const { name, amount, category } = modelExpense.value;
         if(name && amount > 0 && category) {
-            emit('update:expense', modelExpense.value);
+            emit('addExpense', {
+                ...modelExpense.value,
+                id: Date.now(),
+                date: Date.now()
+            });
             emit('hideModal');
         }else{
             error.value = 'Todos los campos son obligatorios';

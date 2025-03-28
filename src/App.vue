@@ -15,13 +15,13 @@
 				<img @click="showModal" :src="NewBudgetIcon" alt="Nuevo gasto" />
 			</div>
 
-			<Modal v-if="modal.show" v-model:expense="expense" :modal="modal" @hideModal="hideModal"/>
+			<Modal v-if="modal.show" v-model:expense="expense" :modal="modal" @addExpense="handleAddExpense" @hideModal="hideModal"/>
 		</main>
 	</div>
 </template>
 
 <script setup>
-	import { ref, reactive } from 'vue';
+	import { ref, reactive, watch } from 'vue';
 
 	import Modal from './components/Modal.vue';
 	import Budget from './components/Budget.vue';
@@ -30,6 +30,8 @@
 
 	const budget = ref(0);
 	const available = ref(0);
+	const expenses = ref([]);
+
 	const modal = reactive({
 		show: false,
 		animate: false
@@ -61,6 +63,16 @@
 			modal.show = false;
 		}, 300);
 	}
+
+	const handleAddExpense = (newExpense) => {
+		expenses.value.push({ ...newExpense });
+
+		expense.name = '';
+		expense.amount = 0;
+		expense.category = '';
+		expense.id = null;
+		expense.date = Date.now();
+	};
 </script>
 
 <style lang="scss">
