@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="{fixed: modal.show}">
 		<header>
 			<h1>Planificador de gastos</h1>
 
@@ -83,6 +83,14 @@
 
 <style lang="scss">
 	@import '@scss/app.scss';
+
+	.fixed {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
 
 	.createBudget {
 		position: fixed;
