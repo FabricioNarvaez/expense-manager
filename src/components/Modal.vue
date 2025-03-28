@@ -5,7 +5,7 @@
         </div>
 
         <div class="contenedor">
-            <form>
+            <form class="newExpense">
                 <legend>Ingresa tu gasto</legend>
                 <div class="field">
                     <label for="name">Nombre del gasto:</label>
@@ -60,5 +60,43 @@
         &:hover {
             transform: scale(1.1);
         }
+    }
+
+    .newExpense {
+        margin: 10rem auto 0 auto;
+        display: grid;
+        gap: 2rem;
+
+        legend {
+            font-size: 3rem;
+            color: white;
+            text-align: center;
+        }
+
+        input,
+        select {
+            background-color: $light-gray;
+            border: none;
+            border-radius: 1rem;
+            padding: 1rem;
+            font-size: 1.8rem;
+        }
+
+        label {
+            font-size: 2rem;
+            color: white;
+        }
+
+        input[type="submit"] {
+            background-color: $blue;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    }
+
+    .field{
+        display: grid;
+        gap: 1rem;
     }
 </style>
