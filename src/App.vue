@@ -15,7 +15,7 @@
 				<img @click="showModal" :src="NewBudgetIcon" alt="Nuevo gasto" />
 			</div>
 
-			<Modal v-if="modal.show" :animate="modal.animate" @hideModal="hideModal"/>
+			<Modal v-if="modal.show" :modal="modal" @hideModal="hideModal"/>
 		</main>
 	</div>
 </template>
@@ -42,12 +42,16 @@
 
 	const showModal = () =>{
 		modal.show = true;
-		modal.animate = true;
+		setTimeout(() => {
+			modal.animate = true;
+		}, 300);
 	}
 
 	const hideModal = () =>{
-		modal.show = false;
 		modal.animate = false;
+		setTimeout(() => {
+			modal.show = false;
+		}, 300);
 	}
 </script>
 

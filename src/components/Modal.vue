@@ -4,7 +4,7 @@
             <img @click="$emit('hideModal')" src="@/assets/img/cerrar.svg" alt="Cerrar modal" />
         </div>
 
-        <div class="contenedor">
+        <div class="contenedor formContainer" :class="[modal.animate ? 'animate' : 'close']">
             <form class="newExpense">
                 <legend>Ingresa tu gasto</legend>
                 <div class="field">
@@ -37,6 +37,13 @@
 
 <script setup>
     defineEmits(['hideModal']);
+
+    const props = defineProps({
+        modal: {
+            type: Object,
+            required: true
+        }
+    });
 </script>
 
 <style lang="scss" scoped>
@@ -47,6 +54,19 @@
         left: 0;
         right: 0;
         bottom: 0;
+    }
+
+    .formContainer{
+        transition: all .5s ease-in-out;
+        opacity: 0;
+
+        &.animate {
+            opacity: 1;
+        }
+
+        &.close {
+            opacity: 0;
+        }
     }
 
     .closeModal {
