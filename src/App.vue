@@ -63,10 +63,10 @@
 	.createBudget img{
 		width: 5rem;
 		transition: all .3s ease;
-	}
 
-	.createBudget img:hover{
-		cursor: pointer;
-		transform: scale(1.1);
+		&:hover{
+			transform: scale(1.1);
+			cursor: pointer;
+		}
 	}
 </style>

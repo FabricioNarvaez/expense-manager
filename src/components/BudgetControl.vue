@@ -64,11 +64,11 @@
         border-radius: 4px;
         color: $white;
         transition: all .3s ease-in-out;
-    }
-
-    .resetApp:hover {
-        background-color: $button-hover;
-        cursor: pointer;
+        
+        &:hover {
+            background-color: $button-hover;
+            cursor: pointer;
+        }
     }
 
     @media (min-width: 768px) {
