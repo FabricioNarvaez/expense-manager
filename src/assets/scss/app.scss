@@ -44,19 +44,19 @@ header {
     }
 }
 
-.contenedor {
+.container {
     width: 90%;
     max-width: 80rem;
     margin: 0 auto;
 }
 
-.contenedorHeader {
+.containerHeader {
     margin-top: -5rem;
     transform: translateY(5rem);
     padding: 5rem;
 }
 
-.sombra {
+.shadow {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     background-color: $white;
     border-radius: 1.2rem;

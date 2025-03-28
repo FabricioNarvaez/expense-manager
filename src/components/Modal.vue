@@ -4,7 +4,7 @@
             <img @click="$emit('hideModal')" src="@/assets/img/cerrar.svg" alt="Cerrar modal" />
         </div>
 
-        <div class="contenedor formContainer" :class="[modal.animate ? 'animate' : 'close']">
+        <div class="container formContainer" :class="[modal.animate ? 'animate' : 'close']">
             <form class="newExpense" @submit.prevent="addExpense">
                 <legend>Ingresa tu gasto</legend>
                 <Alert v-if="error">{{ error }}</Alert>
@@ -21,7 +21,7 @@
                     <select id="category" v-model="modelExpense.category">
                         <option value="">-- Seleccione --</option>
                         <option value="comida">Comida</option>
-                        <option value="Ahorro">Ahorro</option>
+                        <option value="ahorro">Ahorro</option>
                         <option value="transporte">Transporte</option>
                         <option value="salud">Salud</option>
                         <option value="casa">Casa</option>

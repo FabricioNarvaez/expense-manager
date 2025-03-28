@@ -4,13 +4,18 @@
 			<h1>Planificador de gastos</h1>
 
 			
-			<div class="contenedor contenedorHeader sombra">
+			<div class="container containerHeader shadow">
 				<Budget v-if="budget === 0" @setBudget="setBudget" />
 				<BudgetControl v-else :budget :available/>
 			</div>
 		</header>
 
 		<main v-if="budget > 0">
+			<div class="container expenseList">
+				<h2>{{ expenses.length ? 'Gastos' : 'No hay gastos' }}</h2>
+				<Expense v-for="expense in expenses" :key="expense.id" :expense/>
+			</div>
+
 			<div class="createBudget">
 				<img @click="showModal" :src="NewBudgetIcon" alt="Nuevo gasto" />
 			</div>
@@ -25,6 +30,7 @@
 
 	import Modal from './components/Modal.vue';
 	import Budget from './components/Budget.vue';
+	import Expense from './components/Expense.vue';
 	import BudgetControl from './components/BudgetControl.vue';
 	import NewBudgetIcon from '@img/nuevo-gasto.svg';
 
@@ -91,6 +97,15 @@
 		&:hover{
 			transform: scale(1.1);
 			cursor: pointer;
+		}
+	}
+
+	.expenseList {
+		margin-top: 10rem;
+
+		h2{
+			color: $gray;
+			font-weight: 700;
 		}
 	}
 </style>
