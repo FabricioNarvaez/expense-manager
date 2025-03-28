@@ -5,19 +5,20 @@
         </div>
 
         <div class="contenedor formContainer" :class="[modal.animate ? 'animate' : 'close']">
-            <form class="newExpense">
+            <form class="newExpense" @submit.prevent="addExpense">
                 <legend>Ingresa tu gasto</legend>
+                <Alert v-if="error">{{ error }}</Alert>
                 <div class="field">
                     <label for="name">Nombre del gasto:</label>
-                    <input type="text" id="name" placeholder="Ej. Transporte" />
+                    <input v-model="modelExpense.name" type="text" id="name" placeholder="Ej. Transporte" />
                 </div>
                 <div class="field">
                     <label for="amount">Cantidad:</label>
-                    <input type="number" id="amount" placeholder="Ej. 300" />
+                    <input v-model="modelExpense.amount" type="number" id="amount" placeholder="Ej. 300" />
                 </div>
                 <div class="field">
                     <label for="category">Categoría:</label>
-                    <select id="category">
+                    <select id="category" v-model="modelExpense.category">
                         <option value="">-- Seleccione --</option>
                         <option value="comida">Comida</option>
                         <option value="Ahorro">Ahorro</option>
@@ -36,14 +37,31 @@
 </template>
 
 <script setup>
-    defineEmits(['hideModal']);
+    import { ref } from 'vue';
+    import Alert from './Alert.vue';
 
+    const emit = defineEmits(['hideModal']);
+    const expense = defineModel('expense');
     const props = defineProps({
         modal: {
             type: Object,
             required: true
         }
     });
+    
+    const modelExpense = ref({ ...expense.value });
+    const error = ref('');
+
+    const addExpense = () => {
+        const { name, amount, category } = modelExpense.value;
+        if(name && amount > 0 && category) {
+            emit('update:expense', modelExpense.value);
+            emit('hideModal');
+        }else{
+            error.value = 'Todos los campos son obligatorios';
+            return
+        }
+    }
 </script>
 
 <style lang="scss" scoped>

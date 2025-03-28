@@ -15,7 +15,7 @@
 				<img @click="showModal" :src="NewBudgetIcon" alt="Nuevo gasto" />
 			</div>
 
-			<Modal v-if="modal.show" :modal="modal" @hideModal="hideModal"/>
+			<Modal v-if="modal.show" v-model:expense="expense" :modal="modal" @hideModal="hideModal"/>
 		</main>
 	</div>
 </template>
@@ -33,6 +33,14 @@
 	const modal = reactive({
 		show: false,
 		animate: false
+	})
+
+	const expense = reactive({
+		name: '',
+		amount: 0,
+		category: '',
+		id: null, 
+		date: Date.now()
 	})
 
 	const setBudget = (newBudget) => {
