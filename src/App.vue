@@ -12,25 +12,37 @@
 
 		<main v-if="budget > 0">
 			<div class="createBudget">
-				<img :src="NewBudgetIcon" alt="Nuevo gasto" />
+				<img @click="showModal" :src="NewBudgetIcon" alt="Nuevo gasto" />
 			</div>
+
+			<Modal v-if="modal.show" :animate="modal.animate" />
 		</main>
 	</div>
 </template>
 
-<script setup lang="ts">
-	import { ref } from 'vue';
+<script setup>
+	import { ref, reactive } from 'vue';
 
+	import Modal from './components/Modal.vue';
 	import Budget from './components/Budget.vue';
 	import BudgetControl from './components/BudgetControl.vue';
 	import NewBudgetIcon from '@img/nuevo-gasto.svg';
 
 	const budget = ref(0);
 	const available = ref(0);
+	const modal = reactive({
+		show: false,
+		animate: false
+	})
 
-	const setBudget = (newBudget: number) => {
+	const setBudget = (newBudget) => {
 		budget.value = newBudget;
 		available.value = newBudget;
+	}
+
+	const showModal = () =>{
+		modal.show = true;
+		modal.animate = true;
 	}
 </script>
 

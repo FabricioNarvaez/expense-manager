@@ -11,7 +11,7 @@
     </form>
 </template>
 
-<script setup lang="ts">
+<script setup>
     import { ref } from "vue";
 
     import Alert from "./Alert.vue";
