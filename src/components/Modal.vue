@@ -30,7 +30,7 @@
                     </select>
                 </div>
 
-                <input type="submit" value="Agregar gasto" />
+                <input type="submit" :value='expense.name ? "Guardar Cambios": "Agregar gasto"' />
             </form>
         </div>
     </div>
