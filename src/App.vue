@@ -13,7 +13,7 @@
 		<main v-if="budget > 0">
 			<div class="container expenseList">
 				<h2>{{ expenses.length ? 'Gastos' : 'No hay gastos' }}</h2>
-				<Expense v-for="expense in expenses" :key="expense.id" :expense/>
+				<Expense v-for="expense in expenses" :key="expense.id" :expense @selectExpense="selectExpense"/>
 			</div>
 
 			<div class="createBudget">
@@ -38,6 +38,10 @@
 	const spent = ref(0);
 	const available = ref(0);
 	const expenses = ref([]);
+	const modal = reactive({
+		show: false,
+		animate: false
+	})
 
 	watch(expenses, () => {
 		const totalExpenses = expenses.value.reduce((total, expense) => total + expense.amount, 0);
@@ -45,10 +49,21 @@
 		spent.value = totalExpenses;
 	}, { deep: true });
 
-	const modal = reactive({
-		show: false,
-		animate: false
+	watch(modal, ()=>{
+		if(!modal.show){
+			resetStateExpense();
+		}
+	}, {
+		deep: true
 	})
+
+	const resetStateExpense = () => {
+		expense.name = '';
+		expense.amount = 0;
+		expense.category = '';
+		expense.id = null;
+		expense.date = Date.now();
+	}
 
 	const expense = reactive({
 		name: '',
@@ -78,14 +93,21 @@
 	}
 
 	const handleAddExpense = (newExpense) => {
-		expenses.value.push({ ...newExpense });
-
-		expense.name = '';
-		expense.amount = 0;
-		expense.category = '';
-		expense.id = null;
-		expense.date = Date.now();
+		const index = expenses.value.findIndex(expense => expense.id === newExpense.id);
+		if(index >= 0){
+			expenses.value[index] = {id: Date.now(), ...newExpense };
+			return
+		}else{
+			expenses.value.push({ ...newExpense });
+		}
+		resetStateExpense();
 	};
+
+	const selectExpense = id => {
+		const editExpense = expenses.value.find(expense => expense.id === id);
+		Object.assign(expense, editExpense);
+		showModal();
+	}
 </script>
 
 <style lang="scss">

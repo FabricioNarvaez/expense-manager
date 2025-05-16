@@ -65,7 +65,6 @@
             };
             emit('addExpense', {
                 ...modelExpense.value,
-                id: Date.now(),
                 date: Date.now()
             });
             emit('hideModal');

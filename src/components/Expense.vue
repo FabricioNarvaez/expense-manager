@@ -4,7 +4,7 @@
             <img class="icon" :src="diccionarioIconos[expense.category]" alt="Icono de gasto" />
             <div class="details">
                 <p class="category">{{ expense.category }}</p>
-                <p class="name">{{ expense.name }}</p>
+                <p class="name" @click="$emit('selectExpense', expense.id)">{{ expense.name }}</p>
                 <p class="date">Fecha: <span>{{ formatDate(expense.date) }}</span></p>
             </div>
         </div>
@@ -38,7 +38,9 @@
             type: Object,
             required: true
         }
-    })
+    });
+
+    defineEmits(['selectExpense']);
 </script>
 
 <style lang="scss">
