@@ -95,10 +95,10 @@
 	const handleAddExpense = (newExpense) => {
 		const index = expenses.value.findIndex(expense => expense.id === newExpense.id);
 		if(index >= 0){
-			expenses.value[index] = {id: Date.now(), ...newExpense };
+			expenses.value[index] = { ...newExpense };
 			return
 		}else{
-			expenses.value.push({ ...newExpense });
+			expenses.value.push({id: Date.now(), ...newExpense });
 		}
 		resetStateExpense();
 	};
