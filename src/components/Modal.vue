@@ -46,6 +46,10 @@
         modal: {
             type: Object,
             required: true
+        },
+        available: {
+            type: Number,
+            required: true
         }
     });
     
@@ -55,6 +59,10 @@
     const addExpense = () => {
         const { name, amount, category } = modelExpense.value;
         if(name && amount > 0 && category) {
+            if(amount > props.available) {
+                error.value = 'El gasto no puede ser mayor al presupuesto disponible';
+                return
+            };
             emit('addExpense', {
                 ...modelExpense.value,
                 id: Date.now(),

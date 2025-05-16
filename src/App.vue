@@ -20,7 +20,7 @@
 				<img @click="showModal" :src="NewBudgetIcon" alt="Nuevo gasto" />
 			</div>
 
-			<Modal v-if="modal.show" v-model:expense="expense" :modal="modal" @addExpense="handleAddExpense" @hideModal="hideModal"/>
+			<Modal v-if="modal.show" v-model:expense="expense" :modal="modal" :available @addExpense="handleAddExpense" @hideModal="hideModal"/>
 		</main>
 	</div>
 </template>
