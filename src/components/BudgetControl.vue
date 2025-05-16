@@ -7,7 +7,7 @@
         <div class="expensesContainer">
             <p>Presupuesto: <span>{{ formatAmount(budget) }} </span></p>
             <p>Disponible: <span>{{ formatAmount(available) }} </span></p>
-            <p>Gastado: <span>{{ formatAmount(0) }} </span></p>
+            <p>Gastado: <span>{{ formatAmount(spent) }} </span></p>
             
             <button class="resetApp">Resetear App</button>
         </div>
@@ -26,6 +26,10 @@
             required: true
         },
         available: {
+            type: Number,
+            required: true
+        },
+        spent: {
             type: Number,
             required: true
         }

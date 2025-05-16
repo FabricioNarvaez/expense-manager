@@ -6,7 +6,7 @@
 			
 			<div class="container containerHeader shadow">
 				<Budget v-if="budget === 0" @setBudget="setBudget" />
-				<BudgetControl v-else :budget :available/>
+				<BudgetControl v-else :budget :available :spent/>
 			</div>
 		</header>
 
@@ -35,8 +35,15 @@
 	import NewBudgetIcon from '@img/nuevo-gasto.svg';
 
 	const budget = ref(0);
+	const spent = ref(0);
 	const available = ref(0);
 	const expenses = ref([]);
+
+	watch(expenses, () => {
+		const totalExpenses = expenses.value.reduce((total, expense) => total + expense.amount, 0);
+		available.value = budget.value - totalExpenses;
+		spent.value = totalExpenses;
+	}, { deep: true });
 
 	const modal = reactive({
 		show: false,
